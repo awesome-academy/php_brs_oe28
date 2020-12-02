@@ -99,4 +99,6 @@ return [
     'weekly_report' => 'Báo cáo hàng tuần',
     'no_new_review' => 'Không có cảm nhận mới tuần này',
     'no_new_book' => 'Không có sách mới tuần này',
+    'new_review_per_month' => 'Cảm nhận mới mỗi tháng',
+    'new_review' => 'Cảm nhận mới',
 ];

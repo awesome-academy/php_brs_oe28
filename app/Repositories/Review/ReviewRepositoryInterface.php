@@ -21,4 +21,6 @@ interface ReviewRepositoryInterface extends RepositoryInterface
     public function getLastestReview();
 
     public function getLastWeekReview();
+
+    public function getNewReviewPerMonth();
 }

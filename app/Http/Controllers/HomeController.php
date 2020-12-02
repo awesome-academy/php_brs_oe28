@@ -2,17 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
 use App\Repositories\Book\BookRepositoryInterface;
+use App\Repositories\Review\ReviewRepositoryInterface;
 
 class HomeController extends Controller
 {
     protected $bookRepo;
+    protected $reviewRepo;
 
-    public function __construct(BookRepositoryInterface $bookRepositoryInterface)
-    {
+    public function __construct(
+        BookRepositoryInterface $bookRepositoryInterface,
+        ReviewRepositoryInterface $reviewRepositoryInterface
+    ) {
         $this->middleware('auth');
         $this->bookRepo = $bookRepositoryInterface;
+        $this->reviewRepo = $reviewRepositoryInterface;
     }
 
     /**
@@ -29,6 +33,8 @@ class HomeController extends Controller
 
     public function admin_index()
     {
-        return view('admin_index');
+        $data = $this->reviewRepo->getNewReviewPerMonth();
+
+        return view('admin_index', compact('data'));
     }
 }

@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Repositories\BaseRepository;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ReviewRepository extends BaseRepository implements ReviewRepositoryInterface
 {
@@ -93,5 +94,19 @@ class ReviewRepository extends BaseRepository implements ReviewRepositoryInterfa
     public function getLastWeekReview()
     {
         return Review::where('created_at', '>=', Carbon::now()->subDays(7))->get();
+    }
+
+    public function getNewReviewPerMonth()
+    {
+        $months = Review::whereYear('created_at', Carbon::now()->year)
+            ->select(DB::raw("MONTH(created_at) as month"), DB::raw("count('month') as reviews_count"))
+            ->groupby('month')
+            ->get();
+        $data = array_fill(1, 12, 0);
+        foreach ($months as $month) {
+            $data[$month->month] = $month->reviews_count;
+        }
+
+        return json_encode($data);
     }
 }

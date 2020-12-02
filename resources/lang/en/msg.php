@@ -99,4 +99,6 @@ return [
     'weekly_report' => 'Weekly Report',
     'no_new_review' => 'No new review this week',
     'no_new_book' => 'No new book this week',
+    'new_review_per_month' => 'New review per month',
+    'new_review' => 'New review',
 ];
