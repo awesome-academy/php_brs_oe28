@@ -42,7 +42,7 @@ class ReviewController extends Controller
             );
             $this->reviewRepo->create($request->all());
 
-            $review = $this->reviewRepo->getLastestReview();;
+            $review = $this->reviewRepo->getLastestReview();
             $data = [
                 'name' => Auth::user()->name,
                 'time' => date('H:i, d-m-Y'),

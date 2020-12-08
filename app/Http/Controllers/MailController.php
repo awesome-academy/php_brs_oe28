@@ -2,15 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Book;
-use App\Models\Review;
-use App\Models\User;
 use App\Repositories\Book\BookRepositoryInterface;
 use App\Repositories\Review\ReviewRepositoryInterface;
 use App\Repositories\User\UserRepositoryInterface;
 use Illuminate\Support\Facades\Mail;
-use Carbon\Carbon;
-use Illuminate\Http\Request;
 
 class MailController extends Controller
 {
@@ -40,10 +35,12 @@ class MailController extends Controller
         foreach ($admins as $admin) {
             $email = $admin->email;
             Mail::send('emails.weekly_report', $data, function ($message) use ($email) {
-                $message->from(env('MAIL_FROM_ADDRESS'), env('MAIL_FROM_NAME'));
+                $message->from(config('mail.from.address'), config('mail.from.name'));
                 $message->to($email);
                 $message->subject(trans('msg.weekly_report'));
             });
         }
+
+        return true;
     }
 }

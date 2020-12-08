@@ -18,7 +18,7 @@ Route::group(['middleware' => 'localization'], function () {
 
     Route::group(['prefix' => 'admin', 'middleware' => 'admin'], function () {
 
-        Route::get('/', 'HomeController@admin_index')->name('admin_index');
+        Route::get('/', 'HomeController@adminIndex')->name('admin_index');
 
         Route::resource('books', 'BookController');
 

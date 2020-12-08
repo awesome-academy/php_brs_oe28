@@ -31,7 +31,7 @@ class HomeController extends Controller
         return view('home', compact('books'));
     }
 
-    public function admin_index()
+    public function adminIndex()
     {
         $data = $this->reviewRepo->getNewReviewPerMonth();
 
